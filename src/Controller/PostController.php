@@ -8,8 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/', methods:['GET'], name: 'posts.index')] // to odpowiada stronir głównej
-    public function inex() : Response
+    #[Route('/{_locale?}', methods:['GET'], name: 'posts.index')] // to odpowiada stronir głównej
+    public function index() : Response
     {
         return $this->render('post/index.html.twig');
     }
@@ -22,7 +22,7 @@ class PostController extends AbstractController
     }
 
     // Wyświetlanie szczegółów posta na blogu
-    #[Route('/post/{id}' , methods: ['GET'] , name: 'posts.show')]
+    #[Route('/post/{id}/{_locale?}' , methods: ['GET'] , name: 'posts.show')]
     public function show($id) : Response
     {
         return $this->render('post/show.html.twig');

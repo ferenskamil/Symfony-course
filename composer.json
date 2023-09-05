@@ -12,7 +12,9 @@
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
         "symfony/runtime": "6.2.*",
+        "symfony/translation": "6.2.*",
         "symfony/twig-bundle": "6.2.*",
+        "symfony/ux-twig-component": "^2.11",
         "symfony/webpack-encore-bundle": "^2.0",
         "symfony/yaml": "6.2.*"
     },
