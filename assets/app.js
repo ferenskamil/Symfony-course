@@ -7,13 +7,15 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import Alpine from 'alpinejs';
+Alpine.start();
 
 // start the Stimulus application
 // import './bootstrap';
 
-const btn = document.getElementById("hamburger-icon");
-const nav = document.getElementById("mobile-menu");
-btn.addEventListener("click", () => {
-    nav.classList.toggle("flex");
-    nav.classList.toggle("hidden");
+const btn = document.getElementById('hamburger-icon');
+const nav = document.getElementById('mobile-menu');
+btn.addEventListener('click', () => {
+	nav.classList.toggle('flex');
+	nav.classList.toggle('hidden');
 });
