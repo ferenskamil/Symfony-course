@@ -22,4 +22,10 @@ class LoginController extends AbstractController
             'error' => $error
         ]);
     }
+
+    #[Route('/{_locale}/logout', name: 'app_logout')]
+    public function logout(){
+        // controller can be blank : it will never be called
+        throw new \Exception('Dont\'t forget to activate logout in security.yaml');
+    }
 }
