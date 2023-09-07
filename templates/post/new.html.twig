@@ -12,27 +12,50 @@
                 { 'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}
                 )}}
 
+                {# Deklarujemy zmienną error #}
+                {% set title_error = form_errors(myNewPostForm.title) ? 'border-red-500' : ''%}
+
                 {# input z atrybutami #}
                 {{ form_widget(myNewPostForm.title ,
                 {'attr' :
-                {'class': 'shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700
+                {'class': (title_error)~'shadow appearance-none border rounded w-full py-2 px-3
+                text-gray-700
                 mb-2 leading-tight focus:outline-none focus:shadow-outline' ,
-                'value' : 'Your title of the post' ,
+                'value' : '' ,
                 'placeholder' : 'write post title here'}})}}
 
                 {# obłsuga błędów #}
-                <p class="text-red-500 text-xs italic">{{ form_errors(myNewPostForm.title)}}</p>
+                {% if myNewPostForm.title.vars['errors'] | length > 0 %}
+                <p class="text-red-500 text-xs italic">
+                        {% for error in myNewPostForm.title.vars
+                        ['errors'] %}
+                        <span>{{ error.message }}</span>
+                        {% endfor %}
+                </p>
+                {% endif %}
 
                 {# kolejny label #}
                 {{ form_label(myNewPostForm.content , 'Post Content' ,
                 { 'label_attr' : {'class' : 'block text-gray-700 font-bold mb-2'}})}}
 
+                {# Deklarujemy zmienną error #}
+                {% set content_error = form_errors(myNewPostForm.title) ? 'border-red-500' : ''%}
+
                 {{ form_widget(myNewPostForm.content , { 'attr' : {
-                'class' : 'drop-shadow-lg w-full h-60 p-4 border border-red-500 focus:outline-none focus:shadow-outline'
+                'class' : (content_error)~'drop-shadow-lg w-full h-60 p-4 border focus:outline-none
+                focus:shadow-outline'
                 , 'value' : '' , 'placeholder' : 'write content here'
                 }})}}
 
-                <p class="text-red-500 text-xs italic">{{ form_errors(myNewPostForm.content)}}</p>
+                {# obłsuga błędów #}
+                {% if myNewPostForm.content.vars['errors'] | length > 0 %}
+                <p class="text-red-500 text-xs italic">
+                        {% for error in myNewPostForm.content.vars
+                        ['errors'] %}
+                        <span>{{ error.message }}</span>
+                        {% endfor %}
+                </p>
+                {% endif %}
 
                 {# Submit btn #}
                 {{ form_widget(myNewPostForm.save , { 'attr' : {
