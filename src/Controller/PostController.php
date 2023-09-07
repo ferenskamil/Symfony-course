@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+// Importujemy to co niezbędne do stworzenia formularza
+use App\Entity\Post;
+use App\Form\NewPostType;
+
 #[Route('/' , requirements: ['_locale' => 'en|pl'])]
 class PostController extends AbstractController
 {
@@ -19,10 +23,20 @@ class PostController extends AbstractController
     #[Route('/{_locale}/post/new' , methods: ['GET' , 'POST'] , name: 'posts.new')]
     public function new() : Response
     {
+        // Tworzymy instancję entity
+        $post = new Post();
+        $post->setTitle('New post');
+        $post->setContent('Lorem ipsum dolor es');
+
+        // tworzymy formularz
+        $form = $this->createForm(NewPostType::class , $post);
+
         // Zabezpieczenie przed dostępem dla niezalogowanych
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        return $this->render('post/new.html.twig');
+        return $this->render('post/new.html.twig' , [
+            'myNewPostForm' => $form
+        ]);
     }
 
     // Wyświetlanie szczegółów posta na blogu
